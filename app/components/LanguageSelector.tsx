@@ -7,6 +7,7 @@ export default function LanguageSelector() {
 
   const languages = [
     { code: "en", label: "English", flag: "🇬🇧" },
+    { code: "fr", label: "Français", flag: "🇫🇷" },
     { code: "de", label: "Deutsch", flag: "🇩🇪" },
     { code: "es", label: "Español", flag: "🇪🇸" },
     { code: "it", label: "Italiano", flag: "🇮🇹" },
@@ -19,7 +20,13 @@ export default function LanguageSelector() {
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const lang = e.target.value;
     if (!lang) return;
-    router.push(`/${lang}/logistique`);
+    if (lang == "en") {
+      router.push('/en')
+    } else if (lang == "fr"){
+      router.push('/')
+    } else {
+      router.push(`/${lang}/logistique`);
+    }
   };
 
   return (
