@@ -30,7 +30,7 @@ export default function HomeFR() {
           <button
             onClick={() => (window.location.href = "/logistique")}
             className="w-[500px] h-[200px] bg-[#1864ab] hover:bg-[#1c7ed6] text-white rounded-xl text-2xl font-medium flex flex-col justify-center items-center text-center transition-colors"
-          >Conclusion
+          >
             Logistique
             <p className="text-lg mt-2">Chargement / Déchargement</p>
           </button>
