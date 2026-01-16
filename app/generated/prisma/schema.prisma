@@ -1,0 +1,90 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int       @id @default(autoincrement())
+  name          String?
+  email         String    @unique
+  password      String
+  role          String    @default("user")
+  emailVerified DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  accounts      Account[]
+  sessions      Session[]
+}
+
+model Account {
+  id                Int     @id @default(autoincrement())
+  userId            Int
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           Int      @id @default(autoincrement())
+  sessionToken String   @unique
+  userId       Int
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Logistic {
+  id                  Int       @id @default(autoincrement())
+  firstName           String
+  lastName            String
+  company             String
+  selectedOption      String
+  tractorRegistration String
+  trailerRegistration String
+  dateEntree          DateTime  @default(now())
+  dateSortie          DateTime?
+  tempsPasse          String?
+  signature           String?   @db.Text
+}
+
+model Others {
+  id                 Int       @id @default(autoincrement())
+  firstName          String
+  lastName           String
+  company            String
+  telephone          String
+  registration       String?
+  distanceParcourue  Int
+  energie            String
+  nbrPersonnes       Int
+  personneAContacter String
+  puissanceFiscale   Int?
+  dateEntree         DateTime  @default(now())
+  dateSortie         DateTime?
+  tempsPasse         String?
+  signature          String?   @db.Text
+}
