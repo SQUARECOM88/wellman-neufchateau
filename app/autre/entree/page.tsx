@@ -23,13 +23,14 @@ const CONTACTS_WELLMAN = [
 export default function OthersFormSlider() {
   const router = useRouter();
   const images = [
-    "/FR_certif.png",
-    "/FR_environnement.png",
+    "/FR_iso.png", 
+    "/FR_environnement.png", 
+    "/FR_urgences.png", 
     "/FR_regle_secu.png",
-    "/FR_plan.png",
-    "/FR_obligations.png",
-    "/FR_interdictions.png",
+    "/FR_interdiction.png", 
+    "/FR_obligation.png",
     "/FR_deversement.png",
+    "/FR_plan2.png"
   ];
 
   const [index, setIndex] = useState(0);
@@ -56,6 +57,15 @@ export default function OthersFormSlider() {
       setIndex(index + 1);
     } else {
       setShowForm(true);
+    }
+  };
+
+  const handlePrev = () => {
+    if (showForm) {
+      setShowForm(false);
+      setIndex(images.length - 1);
+    } else if (index > 0) {
+      setIndex(index - 1);
     }
   };
 
@@ -116,15 +126,32 @@ export default function OthersFormSlider() {
                 className="max-h-full max-w-full object-contain rounded-xl shadow-lg transition-all duration-500"
               />
             </div>
-            <button
-              onClick={handleNext}
-              className="w-[150px] h-[50px] bg-[#1864ab] hover:bg-[#1c7ed6] text-white rounded-xl text-2xl font-medium flex flex-col justify-center items-center text-center transition-colors"
-            >
-              Suivant
-            </button>
+            
+            {/* Zone des boutons modifiée */}
+            <div className="flex gap-4">
+              <button
+                onClick={handlePrev}
+                disabled={index === 0}
+                className={`w-[150px] h-[50px] rounded-xl text-2xl font-medium flex flex-col justify-center items-center text-center transition-colors ${
+                    index === 0 
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed" 
+                    : "w-[150px] h-[50px] bg-[#1864ab] hover:bg-[#1c7ed6] text-white rounded-xl text-2xl font-medium flex flex-col justify-center items-center text-center transition-colors"
+                }`}
+              >
+                Précédent
+              </button>
+
+              <button
+                onClick={handleNext}
+                className="w-[150px] h-[50px] bg-[#1864ab] hover:bg-[#1c7ed6] text-white rounded-xl text-2xl font-medium flex flex-col justify-center items-center text-center transition-colors"
+              >
+                Suivant
+              </button>
+            </div>
           </>
         ) : (
-          <div className="max-w-3xl w-full mx-auto p-8 bg-white rounded-lg shadow-xl">
+          <div className="max-w-3xl w-full mx-auto p-8 bg-white rounded-lg shadow-xl relative">
+
             <form onSubmit={handleSubmit} className="space-y-6">
               <h2 className="text-2xl font-bold mb-6 text-center text-black">
                 Merci de remplir le formulaire suivant :
