@@ -1,31 +1,36 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import RgpdNoticeEN from "@/app/components/RgpdEN";
 
 export default function LogistiqueSlider() {
   const router = useRouter();
-  const introImages = ["/EN_iso.png", "/EN_environnement.png", "/FR_urgences.png", "/EN_regles_secu.png", "/EN_interdictions.png", "/EN_obligations.png"];
   
-  const postChoiceImagesByReason: Record<string, string> = {
-    dechargement: "/EN_obligation_dechargement.png",
-    depotage: "/EN_obligations_acces.png",
-    quai: "/EN_obligation_dechargement.png",
-    expedition: "/EN_obligation_dechargement.png",
+  const introImages = [
+    "/EN_iso.png", 
+    "/EN_environnement.png", 
+    "/FR_urgences.png",
+    "/EN_regles_secu.png", 
+    "/EN_interdiction.jpg", 
+    "/FR_obligation.png"
+  ];
+  
+  const postChoiceImagesByReason: Record<string, string[]> = {
+    dechargement: ["/EN_obligation_dechargement.png", "/EN_obligations_chauffeur.png"],
+    depotage: ["/EN_obligations_chauffeur.png", "/EN_obligations_acces.png"],
+    quai: ["/EN_obligations_chauffeur.png", "/EN_obligation_dechargement.png"],
+    expedition: ["/EN_obligations_chauffeur.png", "/oblig2-en.png", "/oblig3-en.png", "/oblig5-en.png", "/EN_obligation_dechargement.png"],
   };
   
   const postChoiceCommonImages = [
-    "/EN_obligations_chauffeur.png",
     "/EN_deversement.png",
-    "/EN_plan_circulation.png",
+    "/FR_plan2.png",
   ];
 
   const [index, setIndex] = useState(0);
   const [phase, setPhase] = useState<"intro" | "choix" | "postChoice" | "form" | "success">("intro");
-  
-  // Initialized to empty string for "empty choice" handling
   const [reason, setReason] = useState<string>(""); 
   
   const [formData, setFormData] = useState({
@@ -42,40 +47,61 @@ export default function LogistiqueSlider() {
     if (submitted) router.push("/");
   }, [submitted, router]);
 
+  const getCurrentPostChoiceSlides = () => {
+    const specificImages = reason ? (postChoiceImagesByReason[reason] || []) : [];
+    return [...specificImages, ...postChoiceCommonImages];
+  };
+
+  const currentPostChoiceSlides = getCurrentPostChoiceSlides();
+
+  // --- NAVIGATION LOGIC ---
+
   const handleNextIntro = () => {
     if (index < introImages.length - 1) setIndex(index + 1);
     else setPhase("choix");
   };
 
-  // Case 1: Specific choice selected
   const handleSelectReason = (r: string) => {
     setReason(r);
     setPhase("postChoice");
     setIndex(0);
   };
 
-  // Case 2: Skip choice (sends empty string)
   const handleSkipChoice = () => {
-    setReason(""); 
+    setReason("");
     setPhase("postChoice");
     setIndex(0);
   };
 
   const handleNextPostChoice = () => {
-    // If reason exists: 1 specific image + common images
-    // If reason is empty: only common images
-    const totalSlides = reason ? 1 + postChoiceCommonImages.length : postChoiceCommonImages.length;
-    
-    if (index < totalSlides - 1) setIndex(index + 1);
-    else setPhase("form");
+    // Use the length of the merged array
+    if (index < currentPostChoiceSlides.length - 1) {
+      setIndex(index + 1);
+    } else {
+      setPhase("form");
+    }
   };
 
-  const getPostChoiceImage = () => {
-    if (reason) {
-      return index === 0 ? postChoiceImagesByReason[reason] : postChoiceCommonImages[index - 1];
-    } else {
-      // If empty reason, start directly with common images
-      return postChoiceCommonImages[index];
+  const handlePrev = () => {
+    if (phase === "intro") {
+      if (index > 0) setIndex(index - 1);
+    } 
+    else if (phase === "choix") {
+      setPhase("intro");
+      setIndex(introImages.length - 1);
+    } 
+    else if (phase === "postChoice") {
+      if (index > 0) {
+        setIndex(index - 1);
+      } else {
+        setPhase("choix");
+        setReason(""); 
+      }
+    } 
+    else if (phase === "form") {
+      setPhase("postChoice");
+      // Go back to the last slide of the merged array
+      setIndex(currentPostChoiceSlides.length - 1);
     }
   };
 
@@ -92,14 +118,15 @@ export default function LogistiqueSlider() {
       const res = await fetch("/api/logistic/entree", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        // @ts-ignore
         body: JSON.stringify({ ...formData, selectedOption: reason }),
       });
       const data = await res.json();
       if (data.success) setSubmitted(true);
-      else alert("Erreur lors de l'envoi.");
+      else alert("Error while sending.");
     } catch (error) {
       console.error(error);
-      alert("Erreur de connexion au serveur.");
+      alert("Server connection error.");
     } finally {
       setIsSubmitting(false);
     }
@@ -108,8 +135,9 @@ export default function LogistiqueSlider() {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen p-4">
       <button onClick={() => router.push("/en")} className="absolute top-5 left-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-        ← Back
+        ← Home
       </button>
+
       <div className="absolute top-10 left-1/2 -translate-x-1/2">
         <Image
           src="/indorama.jpeg"
@@ -130,15 +158,24 @@ export default function LogistiqueSlider() {
             height={600}
             className="object-contain rounded-xl shadow-lg"
           />
-          <button onClick={handleNextIntro} className="bg-[#1864ab] text-white rounded-xl px-6 py-2 mt-4">
-            Next
-          </button>
+          <div className="flex gap-4 mt-4">
+            <button 
+              onClick={handlePrev} 
+              disabled={index === 0}
+              className={`bg-[#1864ab] text-white rounded-xl px-6 py-2 hover:bg-blue-800 ${index === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-600'}`}
+            >
+              Previous
+            </button>
+            
+            <button onClick={handleNextIntro} className="bg-[#1864ab] text-white rounded-xl px-6 py-2 hover:bg-blue-800">
+              Next
+            </button>
+          </div>
         </>
       )}
 
       {phase === "choix" && (
         <div className="flex flex-col items-center w-full max-w-4xl mt-12">
-          {/* English Title */}
           <h2 className="text-2xl font-bold mb-8 text-center text-black uppercase tracking-wide">
             Choose the reason for your visit
           </h2>
@@ -158,55 +195,83 @@ export default function LogistiqueSlider() {
             ))}
           </div>
 
-          {/* Generic Next Button */}
-          <button 
-            onClick={handleSkipChoice} 
-            className="bg-[#1864ab] text-white rounded-xl px-12 py-3 mt-10 hover:bg-blue-800 transition-colors font-semibold text-lg"
-          >
-            Next 
-          </button>
+          <div className="flex gap-4 mt-10">
+            <button 
+              onClick={handlePrev} 
+              className="bg-gray-500 text-white rounded-xl px-12 py-3 font-semibold text-lg hover:bg-gray-600 transition-colors"
+            >
+              Back
+            </button>
+
+            {/* If you want the "Next" (skip choice) button here as well: */}
+            {/* <button 
+              onClick={handleSkipChoice} 
+              className="bg-[#1864ab] text-white rounded-xl px-12 py-3 hover:bg-blue-800 transition-colors font-semibold text-lg"
+            >
+              Next 
+            </button> */}
+          </div>
         </div>
       )}
 
       {phase === "postChoice" && (
         <>
           <Image
-            key={getPostChoiceImage()}
-            src={getPostChoiceImage()}
+            key={currentPostChoiceSlides[index]} 
+            src={currentPostChoiceSlides[index]}
             alt=""
             width={900}
             height={600}
             className="object-contain rounded-xl shadow-lg mt-4"
           />
-          <button onClick={handleNextPostChoice} className="bg-[#1864ab] text-white rounded-xl px-6 py-2 mt-4">
-            Next
-          </button>
+          <div className="flex gap-4 mt-4">
+             <button 
+              onClick={handlePrev} 
+              className="bg-gray-500 text-white rounded-xl px-6 py-2 hover:bg-gray-600"
+            >
+              Previous
+            </button>
+
+            <button onClick={handleNextPostChoice} className="bg-[#1864ab] text-white rounded-xl px-6 py-2 hover:bg-blue-800">
+              Next
+            </button>
+          </div>
         </>
       )}
 
       {phase === "form" && (
-        <form onSubmit={handleSubmit} className="w-[420px] space-y-4 mt-30">
-            <h2 className="text-2xl font-bold mb-6 text-center text-black">
-              Please fill out this form :
-            </h2>
+        <form onSubmit={handleSubmit} className="w-[420px] space-y-4 mt-30 relative">
+          {/* Small back link */}
+          <button 
+            type="button" 
+            onClick={handlePrev}
+            className="absolute -top-12 left-0 text-blue-700 hover:underline flex items-center gap-1"
+          >
+            ← Review instructions
+          </button>
+
+          <h2 className="text-2xl font-bold mb-6 text-center text-black">
+            Please fill out this form :
+          </h2>
           <input name="firstName" placeholder="First name" onChange={handleChange} className="border p-2 w-full text-black" required />
           <input name="lastName" placeholder="Last name" onChange={handleChange} className="border p-2 w-full text-black" required />
           <input name="company" placeholder="Company" onChange={handleChange} className="border p-2 w-full text-black" required />
           <input name="tractorRegistration" placeholder="Tractor registration" onChange={handleChange} className="border p-2 w-full text-black" required />
-          <input name="trailerRegistration" placeholder="Trailor registration" onChange={handleChange} className="border p-2 w-full text-black" required />
-          <RgpdNoticeEN></RgpdNoticeEN>
+          <input name="trailerRegistration" placeholder="Trailer registration" onChange={handleChange} className="border p-2 w-full text-black" required />
+          
+          <RgpdNoticeEN />
+          
           <label htmlFor="rgpd" className="flex items-center gap-3 cursor-pointer">
-              <input
-                type="checkbox"
-                id="rgpd"
-                required
-                className="form-checkbox h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-              />
-              <span className="text-black">
-                I have read and accept the terms and conditions for the processing of my data in accordance with the privacy policy
-              </span>
+            <input
+              type="checkbox"
+              id="rgpd"
+              required
+              className="form-checkbox h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+            />
+            <span className="text-black">
+              I have read and accept the terms and conditions for the processing of my data in accordance with the privacy policy
+            </span>
           </label>
-
           <button type="submit" disabled={isSubmitting} className="bg-[#1864ab] text-white w-full py-2 rounded">
             {isSubmitting ? "Sending..." : "Submit"}
           </button>
@@ -214,7 +279,7 @@ export default function LogistiqueSlider() {
       )}
 
       {phase === "success" && (
-        <div className="text-green-600 text-xl font-bold mt-4">Success!</div>
+        <div className="text-green-600 text-xl font-bold mt-4">Registered successfully!</div>
       )}
     </main>
   );
