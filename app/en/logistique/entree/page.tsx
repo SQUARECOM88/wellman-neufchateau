@@ -11,9 +11,9 @@ export default function LogistiqueSlider() {
   const introImages = [
     "/EN_iso.png", 
     "/EN_environnement.png", 
-    "/FR_urgences.png",
+    "/EN_urgences.jpg",
     "/EN_regles_secu.png", 
-    "/EN_interdiction.jpg", 
+    "/FR_interdiction.png", 
     "/FR_obligation.png"
   ];
   
