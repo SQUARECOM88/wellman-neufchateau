@@ -1,31 +1,38 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import RgpdNoticeRO from "@/app/components/RgpdRO";
 
 export default function LogistiqueSlider() {
   const router = useRouter();
-  const introImages = ["/RO/iso.png", "/EN_environnement.png", "/RO/interdictions.png", "/RO/obligations.png"];
   
-  const postChoiceImagesByReason: Record<string, string> = {
-    dechargement: "/RO/loading.png",
-    depotage: "/RO/acces.png",
-    quai: "/RO/loading.png",
-    expedition: "/RO/loading.png",
+  
+  const introImages = [
+    "/RO/iso.png", 
+    "/EN_environnement.png", 
+    "/EN_urgences.jpg",
+    "/EN_regles_secu.png", 
+    "/FR_interdiction.png", 
+    "/FR_obligation.png"
+  ];
+  
+  const postChoiceImagesByReason: Record<string, string[]> = {
+    dechargement: ["/RO/loading.png", "/RO/chauffeur.png"],
+    depotage: ["/RO/chauffeur.png", "/RO/acces.png"],
+    quai: ["/RO/chauffeur.png", "/RO/loading.png"],
+    expedition: ["/RO/chauffeur.png", "/oblig2-en.png", "/oblig3-en.png", "/oblig5-en.png", "/RO/loading.png"],
   };
   
   const postChoiceCommonImages = [
-    "/RO/chauffeur.png",
-    "/RO/deversement.png",
-    "/EN_plan_circulation.png",
+    "/EN_deversement.png",
+    "/FR_plan2.png",
   ];
+
 
   const [index, setIndex] = useState(0);
   const [phase, setPhase] = useState<"intro" | "choix" | "postChoice" | "form" | "success">("intro");
-  
-  // Initialisé à "" (chaîne vide) pour gérer le choix vide
   const [reason, setReason] = useState<string>(""); 
   
   const [formData, setFormData] = useState({
@@ -42,40 +49,61 @@ export default function LogistiqueSlider() {
     if (submitted) router.push("/");
   }, [submitted, router]);
 
+  // --- HELPER : Fusion des slides ---
+  const getCurrentPostChoiceSlides = () => {
+    const specificImages = reason ? (postChoiceImagesByReason[reason] || []) : [];
+    return [...specificImages, ...postChoiceCommonImages];
+  };
+
+  const currentPostChoiceSlides = getCurrentPostChoiceSlides();
+
+  // --- NAVIGATION ---
+
   const handleNextIntro = () => {
     if (index < introImages.length - 1) setIndex(index + 1);
     else setPhase("choix");
   };
 
-  // Cas 1 : Choix spécifique
   const handleSelectReason = (r: string) => {
     setReason(r);
     setPhase("postChoice");
     setIndex(0);
   };
 
-  // Cas 2 : Passer sans choisir (envoie vide)
   const handleSkipChoice = () => {
-    setReason(""); 
+    setReason("");
     setPhase("postChoice");
     setIndex(0);
   };
 
   const handleNextPostChoice = () => {
-    // Si raison choisie : 1 image spécifique + images communes
-    // Si pas de raison : juste les images communes
-    const totalSlides = reason ? 1 + postChoiceCommonImages.length : postChoiceCommonImages.length;
-    
-    if (index < totalSlides - 1) setIndex(index + 1);
-    else setPhase("form");
+    // On utilise la taille du tableau fusionné
+    if (index < currentPostChoiceSlides.length - 1) {
+      setIndex(index + 1);
+    } else {
+      setPhase("form");
+    }
   };
 
-  const getPostChoiceImage = () => {
-    if (reason) {
-      return index === 0 ? postChoiceImagesByReason[reason] : postChoiceCommonImages[index - 1];
-    } else {
-      // Si vide, on commence directement par les images communes
-      return postChoiceCommonImages[index];
+  const handlePrev = () => {
+    if (phase === "intro") {
+      if (index > 0) setIndex(index - 1);
+    } 
+    else if (phase === "choix") {
+      setPhase("intro");
+      setIndex(introImages.length - 1);
+    } 
+    else if (phase === "postChoice") {
+      if (index > 0) {
+        setIndex(index - 1);
+      } else {
+        setPhase("choix");
+        setReason(""); 
+      }
+    } 
+    else if (phase === "form") {
+      setPhase("postChoice");
+      setIndex(currentPostChoiceSlides.length - 1);
     }
   };
 
@@ -97,10 +125,10 @@ export default function LogistiqueSlider() {
       });
       const data = await res.json();
       if (data.success) setSubmitted(true);
-      else alert("Erreur lors de l'envoi.");
+      else alert("Eroare la trimitere.");
     } catch (error) {
       console.error(error);
-      alert("Erreur de connexion au serveur.");
+      alert("Eroare de conexiune la server.");
     } finally {
       setIsSubmitting(false);
     }
@@ -111,6 +139,7 @@ export default function LogistiqueSlider() {
       <button onClick={() => router.push("/")} className="absolute top-5 left-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
         ← Înapoi
       </button>
+
       <div className="absolute top-10 left-1/2 -translate-x-1/2">
         <Image
           src="/indorama.jpeg"
@@ -131,15 +160,24 @@ export default function LogistiqueSlider() {
             height={600}
             className="object-contain rounded-xl shadow-lg"
           />
-          <button onClick={handleNextIntro} className="bg-[#1864ab] text-white rounded-xl px-6 py-2 mt-4">
-            Următorul
-          </button>
+          <div className="flex gap-4 mt-4">
+            <button 
+              onClick={handlePrev} 
+              disabled={index === 0}
+              className={`bg-[#1864ab] text-white rounded-xl px-6 py-2 hover:bg-blue-800 ${index === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-600'}`}
+            >
+              Înapoi
+            </button>
+            
+            <button onClick={handleNextIntro} className="bg-[#1864ab] text-white rounded-xl px-6 py-2 hover:bg-blue-800">
+              Următorul
+            </button>
+          </div>
         </>
       )}
 
       {phase === "choix" && (
         <div className="flex flex-col items-center w-full max-w-4xl mt-12">
-          {/* Titre roumain */}
           <h2 className="text-2xl font-bold mb-8 text-center text-black uppercase tracking-wide">
             Alegeți motivul vizitei dumneavoastră
           </h2>
@@ -159,34 +197,52 @@ export default function LogistiqueSlider() {
             ))}
           </div>
 
-          {/* Bouton Suivant pour envoyer champ vide */}
-          <button 
-            onClick={handleSkipChoice} 
-            className="bg-[#1864ab] text-white rounded-xl px-12 py-3 mt-10 hover:bg-blue-800 transition-colors font-semibold text-lg"
-          >
-            Următorul 
-          </button>
+          <div className="flex gap-4 mt-10">
+            <button 
+              onClick={handlePrev} 
+              className="bg-gray-500 text-white rounded-xl px-12 py-3 font-semibold text-lg hover:bg-gray-600 transition-colors"
+            >
+              Înapoi
+            </button>
+          </div>
         </div>
       )}
 
       {phase === "postChoice" && (
         <>
           <Image
-            key={getPostChoiceImage()}
-            src={getPostChoiceImage()}
+            key={currentPostChoiceSlides[index]} 
+            src={currentPostChoiceSlides[index]}
             alt=""
             width={900}
             height={600}
             className="object-contain rounded-xl shadow-lg mt-4"
           />
-          <button onClick={handleNextPostChoice} className="bg-[#1864ab] text-white rounded-xl px-6 py-2 mt-4">
-            Următorul
-          </button>
+          <div className="flex gap-4 mt-4">
+             <button 
+              onClick={handlePrev} 
+              className="bg-gray-500 text-white rounded-xl px-6 py-2 hover:bg-gray-600"
+            >
+              Înapoi
+            </button>
+
+            <button onClick={handleNextPostChoice} className="bg-[#1864ab] text-white rounded-xl px-6 py-2 hover:bg-blue-800">
+              Următorul
+            </button>
+          </div>
         </>
       )}
 
       {phase === "form" && (
-        <form onSubmit={handleSubmit} className="w-[420px] space-y-4 mt-30">
+        <form onSubmit={handleSubmit} className="w-[420px] space-y-4 mt-30 relative">
+          <button 
+            type="button" 
+            onClick={handlePrev}
+            className="absolute -top-12 left-0 text-blue-700 hover:underline flex items-center gap-1"
+          >
+            ← Revizuiți instrucțiunile
+          </button>
+
           <h2 className="text-2xl font-bold mb-6 text-center text-black">
             Vă rugăm să completați acest formular:
           </h2>
@@ -195,7 +251,9 @@ export default function LogistiqueSlider() {
           <input name="company" placeholder="Companie" onChange={handleChange} className="border p-2 w-full text-black" required />
           <input name="tractorRegistration" placeholder="Înmatricularea tractorului" onChange={handleChange} className="border p-2 w-full text-black" required />
           <input name="trailerRegistration" placeholder="Înmatricularea remorcii" onChange={handleChange} className="border p-2 w-full text-black" required />
-          <RgpdNoticeRO></RgpdNoticeRO>
+          
+          <RgpdNoticeRO />
+          
           <label htmlFor="rgpd" className="flex items-center gap-3 cursor-pointer">
             <input
               type="checkbox"
