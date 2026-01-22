@@ -21,12 +21,14 @@ const CONTACTS_WELLMAN = [
 
 export default function OthersFormSlider() {
   const router = useRouter();
+  
+  // Images inchangées
   const images = [
     "/EN_certif.png",
     "/EN_environnement.png",
+    "/EN_urgences.jpg",
     "/EN_regles_secu.png",
-    "/EN_obligations.png",
-    "/EN_interdiction.jpg",
+    "/FR_interdiction.png",
     "/FR_obligation.png",
     "/EN_deversement.png",
     "/FR_plan2.png"
@@ -54,6 +56,18 @@ export default function OthersFormSlider() {
       setIndex(index + 1);
     } else {
       setShowForm(true);
+    }
+  };
+
+  // --- AJOUT FONCTION PREV ---
+  const handlePrev = () => {
+    if (showForm) {
+      // Return to slides
+      setShowForm(false);
+      setIndex(images.length - 1);
+    } else if (index > 0) {
+      // Go back one slide
+      setIndex(index - 1);
     }
   };
 
@@ -111,15 +125,32 @@ export default function OthersFormSlider() {
                 className="max-h-full max-w-full object-contain rounded-xl shadow-lg transition-all duration-500"
               />
             </div>
-            <button
-              onClick={handleNext}
-              className="w-[150px] h-[50px] bg-[#1864ab] hover:bg-[#1c7ed6] text-white rounded-xl text-2xl font-medium flex justify-center items-center transition-colors"
-            >
-              Next
-            </button>
+
+            {/* Zone des boutons modifiée */}
+            <div className="flex gap-4">
+              <button
+                onClick={handlePrev}
+                disabled={index === 0}
+                className={`w-[150px] h-[50px] rounded-xl text-2xl font-medium flex flex-col justify-center items-center text-center transition-colors ${
+                    index === 0 
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed" 
+                    : "bg-gray-500 hover:bg-gray-600 text-white"
+                }`}
+              >
+                Previous
+              </button>
+
+              <button
+                onClick={handleNext}
+                className="w-[150px] h-[50px] bg-[#1864ab] hover:bg-[#1c7ed6] text-white rounded-xl text-2xl font-medium flex justify-center items-center transition-colors"
+              >
+                Next
+              </button>
+            </div>
           </>
         ) : (
-          <div className="max-w-3xl w-full mx-auto p-8 bg-white rounded-lg shadow-xl">
+          <div className="max-w-3xl w-full mx-auto p-8 bg-white rounded-lg shadow-xl relative">
+
             <h2 className="text-2xl font-bold mb-6 text-center text-black">
               Please fill out this form :
             </h2>
