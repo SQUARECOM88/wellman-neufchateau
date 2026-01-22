@@ -92,7 +92,9 @@ export default function LogistiqueSortieForm() {
           className="border p-2 w-full text-black"
           required
         />
-
+          <h2 className="text-2xl font-bold mb-6 text-center text-black">
+            Signature :
+          </h2>
         <div className="border p-2 rounded bg-white">
           <SignatureCanvas
             ref={sigCanvas}

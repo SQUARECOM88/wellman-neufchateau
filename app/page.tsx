@@ -45,7 +45,7 @@ export default function HomeFR() {
           >
             Autres
             <p className="text-lg mt-2">
-              Travaux, entreprise extérieure, livreurs...
+              Travaux / Entreprise extérieure / Livreurs
             </p>
           </button>
           <Image
