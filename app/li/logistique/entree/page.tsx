@@ -133,7 +133,7 @@ export default function LogistiqueSlider() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen p-4">
+    <main className="flex flex-col items-center justify-center h-screen p-4">
       <button onClick={() => router.push("/li")} className="absolute top-5 left-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
         ← Atgal
       </button>
@@ -154,7 +154,7 @@ export default function LogistiqueSlider() {
             key={introImages[index]}
             src={introImages[index]}
             alt=""
-            width={900}
+            width={800}
             height={600}
             className="object-contain rounded-xl shadow-lg"
           />
@@ -189,7 +189,7 @@ export default function LogistiqueSlider() {
             ].map(r => (
               <button key={r.id} onClick={() => handleSelectReason(r.id)}
                 className="bg-white p-4 rounded-xl shadow-lg hover:scale-105 transition-transform flex flex-col items-center">
-                <Image src={r.img} alt={r.label} width={250} height={180} className="object-contain h-48 w-auto" />
+                <Image src={r.img} alt={r.label} width={250} height={180} className="object-contain h-38 w-auto" />
                 <p className="mt-2 font-semibold text-black text-center">{r.label}</p>
               </button>
             ))}
@@ -212,7 +212,7 @@ export default function LogistiqueSlider() {
             key={currentPostChoiceSlides[index]} 
             src={currentPostChoiceSlides[index]}
             alt=""
-            width={900}
+            width={800}
             height={600}
             className="object-contain rounded-xl shadow-lg mt-4"
           />
