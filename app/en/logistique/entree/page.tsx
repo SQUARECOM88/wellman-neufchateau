@@ -26,7 +26,7 @@ export default function LogistiqueSlider() {
   
   const postChoiceCommonImages = [
     "/EN_deversement.png",
-    "/FR_plan2.png",
+    "/EN_plan2.png",
   ];
 
   const [index, setIndex] = useState(0);
