@@ -105,7 +105,7 @@ export default function OthersFormSlider() {
     "w-full p-3 border border-gray-300 rounded-md bg-white text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500";
 
   return (
-    <main className="relative flex flex-col items-center justify-start min-h-screen bg-gray-50 pt-40 pb-20">
+    <main className="relative flex flex-col items-center justify-start h-screen bg-gray-50 overflow-hidden">
       <button onClick={() => router.push("/")} className="absolute top-5 left-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
         ← Retour
       </button>
@@ -113,7 +113,7 @@ export default function OthersFormSlider() {
         <Image src="/indorama.jpeg" alt="Logo Indorama" width={250} height={100} />
       </div>
 
-      <div className="flex flex-col items-center gap-8 w-full">
+      <div className="flex flex-col items-center gap-8 w-full pt-10">
         {!showForm ? (
           <>
             <div className="w-[1000px] max-w-[90vw] h-[600px] flex justify-center items-center">
@@ -127,7 +127,6 @@ export default function OthersFormSlider() {
               />
             </div>
             
-            {/* Zone des boutons modifiée */}
             <div className="flex gap-4">
               <button
                 onClick={handlePrev}
