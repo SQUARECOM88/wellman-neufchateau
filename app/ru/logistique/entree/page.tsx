@@ -26,7 +26,7 @@ export default function LogistiqueSlider() {
   };
   
   const postChoiceCommonImages = [
-    "/EN_deversement.png",
+    "/RU/deversement.png",
     "/EN_plan2.png",
   ];
 
