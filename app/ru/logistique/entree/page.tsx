@@ -22,7 +22,7 @@ export default function LogistiqueSlider() {
     dechargement: ["/RU/dechargement.png", "/RO/chauffeur.png"],
     depotage: ["/RO/chauffeur.png", "/RU/echelle.png"],
     quai: ["/RO/chauffeur.png", "/RU/dechargement.png"],
-    expedition: ["/RO/chauffeur.png", "/oblig2-ru.png", "/oblig3-ru.png", "/oblig4-ru.png", "/RU/dechargement.png"],
+    expedition: ["/RO/chauffeur.png", "/RU/oblig2-ru.png", "/RU/oblig3-ru.png", "/RU/oblig4-ru.png", "/RU/dechargement.png"],
   };
   
   const postChoiceCommonImages = [
