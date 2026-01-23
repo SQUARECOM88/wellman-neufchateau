@@ -112,7 +112,7 @@ export default function OthersFormSlider() {
         <Image src="/indorama.jpeg" alt="Logo Indorama" width={250} height={100} />
       </div>
 
-      <div className="flex flex-col items-center gap-8 w-full pt-10">
+      <div className="flex flex-col items-center gap-8 w-full h-full pt-40 overflow-y-auto pb-10">
         {!showForm ? (
           <>
             <div className="w-[650px] max-w-[90vw] h-[650px] flex justify-center items-center">
