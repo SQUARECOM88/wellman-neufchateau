@@ -9,7 +9,7 @@ export default function LogistiqueSlider() {
   const router = useRouter();
   
   const introImages = [
-    "/EN_iso.png", 
+    "/LT.jpg", 
     "/EN_environnement.png", 
     "/EN_urgences.jpg",
     "/EN_regles_secu.png", 
