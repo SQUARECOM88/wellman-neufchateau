@@ -28,7 +28,7 @@ export default function OthersFormSlider() {
     "/EN_environnement.png",
     "/EN_urgences.jpg",
     "/EN_regles_secu.png",
-    "/FR_interdiction.png",
+    "/EN_interdictions.png",
     "/FR_obligation.png",
     "/EN_deversement.png",
     "/FR_plan2.png"
