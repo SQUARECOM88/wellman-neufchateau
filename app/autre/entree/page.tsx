@@ -116,7 +116,7 @@ export default function OthersFormSlider() {
       <div className="flex flex-col items-center gap-8 w-full pt-10">
         {!showForm ? (
           <>
-            <div className="w-[1000px] max-w-[90vw] h-[600px] flex justify-center items-center">
+            <div className="w-[650px] max-w-[90vw] h-[650px] flex justify-center items-center">
               <Image
                 key={images[index]}
                 src={images[index]}
