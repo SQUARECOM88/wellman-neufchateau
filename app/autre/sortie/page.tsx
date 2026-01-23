@@ -72,7 +72,7 @@ export default function OthersSortieForm() {
       <form onSubmit={handleSubmit} className="w-[420px] space-y-4 mt-5">
         <input type="text" name="prenom" value={formData.prenom} onChange={handleChange} placeholder="Prénom" required className={inputStyle} />
         <input type="text" name="nom" value={formData.nom} onChange={handleChange} placeholder="Nom" required className={inputStyle} />
-        <input type="text" name="entreprise" value={formData.entreprise} onChange={handleChange} placeholder="Entreprise" required className={inputStyle} />
+        <input name="entreprise" value={formData.entreprise} onChange={handleChange} placeholder="Entreprise" required className={inputStyle} />
 
         <div className="space-y-2">
           <label className="block text-sm font-medium text-gray-700">Signature</label>

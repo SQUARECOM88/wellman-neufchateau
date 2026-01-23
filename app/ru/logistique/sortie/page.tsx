@@ -74,6 +74,7 @@ export default function LogistiqueSortieForm() {
       <form onSubmit={handleSubmit} className="w-[420px] space-y-4 mt-30">
         <h2 className="text-black text-lg text-center font-bold">Пожалуйста, заполните эту форму:</h2>
         <input
+          type="text"
           name="firstName"
           placeholder="Имя"
           onChange={handleChange}
@@ -81,6 +82,7 @@ export default function LogistiqueSortieForm() {
           required
         />
         <input
+          type="text"
           name="lastName"
           placeholder="Фамилия"
           onChange={handleChange}

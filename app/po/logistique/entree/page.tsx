@@ -252,9 +252,9 @@ export default function LogistiqueSlider() {
           <h2 className="text-2xl font-bold mb-6 text-center text-black">
             Preencha este formulário:
           </h2>
-          <input name="firstName" placeholder="Nome próprio" onChange={handleChange} className="border p-2 w-full text-black" required />
-          <input name="lastName" placeholder="Nome" onChange={handleChange} className="border p-2 w-full text-black" required />
-          <input name="company" placeholder="Empresa" onChange={handleChange} className="border p-2 w-full text-black" required />
+          <input type="text" name="firstName" placeholder="Nome próprio" onChange={handleChange} className="border p-2 w-full text-black" required />
+          <input type="text" name="lastName" placeholder="Nome" onChange={handleChange} className="border p-2 w-full text-black" required />
+          <input type="text" name="company" placeholder="Empresa" onChange={handleChange} className="border p-2 w-full text-black" required />
           <input name="tractorRegistration" placeholder="Registo do trator" onChange={handleChange} className="border p-2 w-full text-black" required />
           <input name="trailerRegistration" placeholder="Registo de reboque" onChange={handleChange} className="border p-2 w-full text-black" required />
           

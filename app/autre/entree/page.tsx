@@ -157,6 +157,7 @@ export default function OthersFormSlider() {
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <input
+                  type="text"
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
@@ -165,6 +166,7 @@ export default function OthersFormSlider() {
                   className={inputStyle}
                 />
                 <input
+                  type="text"
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
@@ -182,6 +184,7 @@ export default function OthersFormSlider() {
                 className={inputStyle}
               />
               <input
+                type="tel"
                 name="telephone"
                 value={formData.telephone}
                 onChange={handleChange}

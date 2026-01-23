@@ -246,8 +246,8 @@ export default function LogistiqueSlider() {
           <h2 className="text-2xl font-bold mb-6 text-center text-black">
             Vă rugăm să completați acest formular:
           </h2>
-          <input name="firstName" placeholder="Prenume" onChange={handleChange} className="border p-2 w-full text-black" required />
-          <input name="lastName" placeholder="Numele de familie" onChange={handleChange} className="border p-2 w-full text-black" required />
+          <input type="text" name="firstName" placeholder="Prenume" onChange={handleChange} className="border p-2 w-full text-black" required />
+          <input type="text" name="lastName" placeholder="Numele de familie" onChange={handleChange} className="border p-2 w-full text-black" required />
           <input name="company" placeholder="Companie" onChange={handleChange} className="border p-2 w-full text-black" required />
           <input name="tractorRegistration" placeholder="Înmatricularea tractorului" onChange={handleChange} className="border p-2 w-full text-black" required />
           <input name="trailerRegistration" placeholder="Înmatricularea remorcii" onChange={handleChange} className="border p-2 w-full text-black" required />
