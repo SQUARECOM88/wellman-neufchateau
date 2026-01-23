@@ -24,7 +24,7 @@ export default function OthersFormSlider() {
   
   // Images inchangées
   const images = [
-    "/EN_certif.png",
+    "/EN_iso.png",
     "/EN_environnement.png",
     "/EN_urgences.jpg",
     "/EN_regles_secu.png",
