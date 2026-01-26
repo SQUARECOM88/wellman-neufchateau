@@ -13,7 +13,7 @@ export default function LogistiqueSlider() {
     "/EN_environnement.png", 
     "/EN_urgences.jpg",
     "/EN_regles_secu.png", 
-    "/FR_interdiction.png", 
+    "/Tablette-8-indorama-GB.jpg", 
     "/FR_obligation.png"
   ];
   
