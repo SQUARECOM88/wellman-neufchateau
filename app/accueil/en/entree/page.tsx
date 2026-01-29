@@ -76,7 +76,7 @@ export default function OthersFormSlider() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/others/entree", {
+      const res = await fetch("/api/reception/entree", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...formData}),

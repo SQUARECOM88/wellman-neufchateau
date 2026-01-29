@@ -88,3 +88,21 @@ model Others {
   tempsPasse         String?
   signature          String?   @db.Text
 }
+
+model Reception {
+  id                 Int       @id @default(autoincrement())
+  firstName          String
+  lastName           String
+  company            String
+  telephone          String
+  registration       String?
+  distanceParcourue  Int
+  energie            String
+  nbrPersonnes       Int
+  personneAContacter String
+  puissanceFiscale   Int?
+  dateEntree         DateTime  @default(now())
+  dateSortie         DateTime?
+  tempsPasse         String?
+  signature          String?   @db.Text
+}

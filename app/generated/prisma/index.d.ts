@@ -43,6 +43,11 @@ export type Logistic = $Result.DefaultSelection<Prisma.$LogisticPayload>
  * 
  */
 export type Others = $Result.DefaultSelection<Prisma.$OthersPayload>
+/**
+ * Model Reception
+ * 
+ */
+export type Reception = $Result.DefaultSelection<Prisma.$ReceptionPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -221,6 +226,16 @@ export class PrismaClient<
     * ```
     */
   get others(): Prisma.OthersDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.reception`: Exposes CRUD operations for the **Reception** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Receptions
+    * const receptions = await prisma.reception.findMany()
+    * ```
+    */
+  get reception(): Prisma.ReceptionDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -667,7 +682,8 @@ export namespace Prisma {
     Session: 'Session',
     VerificationToken: 'VerificationToken',
     Logistic: 'Logistic',
-    Others: 'Others'
+    Others: 'Others',
+    Reception: 'Reception'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -686,7 +702,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "account" | "session" | "verificationToken" | "logistic" | "others"
+      modelProps: "user" | "account" | "session" | "verificationToken" | "logistic" | "others" | "reception"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1134,6 +1150,80 @@ export namespace Prisma {
           }
         }
       }
+      Reception: {
+        payload: Prisma.$ReceptionPayload<ExtArgs>
+        fields: Prisma.ReceptionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ReceptionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReceptionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ReceptionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReceptionPayload>
+          }
+          findFirst: {
+            args: Prisma.ReceptionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReceptionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ReceptionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReceptionPayload>
+          }
+          findMany: {
+            args: Prisma.ReceptionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReceptionPayload>[]
+          }
+          create: {
+            args: Prisma.ReceptionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReceptionPayload>
+          }
+          createMany: {
+            args: Prisma.ReceptionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ReceptionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReceptionPayload>[]
+          }
+          delete: {
+            args: Prisma.ReceptionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReceptionPayload>
+          }
+          update: {
+            args: Prisma.ReceptionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReceptionPayload>
+          }
+          deleteMany: {
+            args: Prisma.ReceptionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ReceptionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ReceptionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReceptionPayload>[]
+          }
+          upsert: {
+            args: Prisma.ReceptionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReceptionPayload>
+          }
+          aggregate: {
+            args: Prisma.ReceptionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateReception>
+          }
+          groupBy: {
+            args: Prisma.ReceptionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ReceptionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ReceptionCountArgs<ExtArgs>
+            result: $Utils.Optional<ReceptionCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1236,6 +1326,7 @@ export namespace Prisma {
     verificationToken?: VerificationTokenOmit
     logistic?: LogisticOmit
     others?: OthersOmit
+    reception?: ReceptionOmit
   }
 
   /* Types for Logging */
@@ -8048,6 +8139,1177 @@ export namespace Prisma {
 
 
   /**
+   * Model Reception
+   */
+
+  export type AggregateReception = {
+    _count: ReceptionCountAggregateOutputType | null
+    _avg: ReceptionAvgAggregateOutputType | null
+    _sum: ReceptionSumAggregateOutputType | null
+    _min: ReceptionMinAggregateOutputType | null
+    _max: ReceptionMaxAggregateOutputType | null
+  }
+
+  export type ReceptionAvgAggregateOutputType = {
+    id: number | null
+    distanceParcourue: number | null
+    nbrPersonnes: number | null
+    puissanceFiscale: number | null
+  }
+
+  export type ReceptionSumAggregateOutputType = {
+    id: number | null
+    distanceParcourue: number | null
+    nbrPersonnes: number | null
+    puissanceFiscale: number | null
+  }
+
+  export type ReceptionMinAggregateOutputType = {
+    id: number | null
+    firstName: string | null
+    lastName: string | null
+    company: string | null
+    telephone: string | null
+    registration: string | null
+    distanceParcourue: number | null
+    energie: string | null
+    nbrPersonnes: number | null
+    personneAContacter: string | null
+    puissanceFiscale: number | null
+    dateEntree: Date | null
+    dateSortie: Date | null
+    tempsPasse: string | null
+    signature: string | null
+  }
+
+  export type ReceptionMaxAggregateOutputType = {
+    id: number | null
+    firstName: string | null
+    lastName: string | null
+    company: string | null
+    telephone: string | null
+    registration: string | null
+    distanceParcourue: number | null
+    energie: string | null
+    nbrPersonnes: number | null
+    personneAContacter: string | null
+    puissanceFiscale: number | null
+    dateEntree: Date | null
+    dateSortie: Date | null
+    tempsPasse: string | null
+    signature: string | null
+  }
+
+  export type ReceptionCountAggregateOutputType = {
+    id: number
+    firstName: number
+    lastName: number
+    company: number
+    telephone: number
+    registration: number
+    distanceParcourue: number
+    energie: number
+    nbrPersonnes: number
+    personneAContacter: number
+    puissanceFiscale: number
+    dateEntree: number
+    dateSortie: number
+    tempsPasse: number
+    signature: number
+    _all: number
+  }
+
+
+  export type ReceptionAvgAggregateInputType = {
+    id?: true
+    distanceParcourue?: true
+    nbrPersonnes?: true
+    puissanceFiscale?: true
+  }
+
+  export type ReceptionSumAggregateInputType = {
+    id?: true
+    distanceParcourue?: true
+    nbrPersonnes?: true
+    puissanceFiscale?: true
+  }
+
+  export type ReceptionMinAggregateInputType = {
+    id?: true
+    firstName?: true
+    lastName?: true
+    company?: true
+    telephone?: true
+    registration?: true
+    distanceParcourue?: true
+    energie?: true
+    nbrPersonnes?: true
+    personneAContacter?: true
+    puissanceFiscale?: true
+    dateEntree?: true
+    dateSortie?: true
+    tempsPasse?: true
+    signature?: true
+  }
+
+  export type ReceptionMaxAggregateInputType = {
+    id?: true
+    firstName?: true
+    lastName?: true
+    company?: true
+    telephone?: true
+    registration?: true
+    distanceParcourue?: true
+    energie?: true
+    nbrPersonnes?: true
+    personneAContacter?: true
+    puissanceFiscale?: true
+    dateEntree?: true
+    dateSortie?: true
+    tempsPasse?: true
+    signature?: true
+  }
+
+  export type ReceptionCountAggregateInputType = {
+    id?: true
+    firstName?: true
+    lastName?: true
+    company?: true
+    telephone?: true
+    registration?: true
+    distanceParcourue?: true
+    energie?: true
+    nbrPersonnes?: true
+    personneAContacter?: true
+    puissanceFiscale?: true
+    dateEntree?: true
+    dateSortie?: true
+    tempsPasse?: true
+    signature?: true
+    _all?: true
+  }
+
+  export type ReceptionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Reception to aggregate.
+     */
+    where?: ReceptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Receptions to fetch.
+     */
+    orderBy?: ReceptionOrderByWithRelationInput | ReceptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ReceptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Receptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Receptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Receptions
+    **/
+    _count?: true | ReceptionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ReceptionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ReceptionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ReceptionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ReceptionMaxAggregateInputType
+  }
+
+  export type GetReceptionAggregateType<T extends ReceptionAggregateArgs> = {
+        [P in keyof T & keyof AggregateReception]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateReception[P]>
+      : GetScalarType<T[P], AggregateReception[P]>
+  }
+
+
+
+
+  export type ReceptionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ReceptionWhereInput
+    orderBy?: ReceptionOrderByWithAggregationInput | ReceptionOrderByWithAggregationInput[]
+    by: ReceptionScalarFieldEnum[] | ReceptionScalarFieldEnum
+    having?: ReceptionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ReceptionCountAggregateInputType | true
+    _avg?: ReceptionAvgAggregateInputType
+    _sum?: ReceptionSumAggregateInputType
+    _min?: ReceptionMinAggregateInputType
+    _max?: ReceptionMaxAggregateInputType
+  }
+
+  export type ReceptionGroupByOutputType = {
+    id: number
+    firstName: string
+    lastName: string
+    company: string
+    telephone: string
+    registration: string | null
+    distanceParcourue: number
+    energie: string
+    nbrPersonnes: number
+    personneAContacter: string
+    puissanceFiscale: number | null
+    dateEntree: Date
+    dateSortie: Date | null
+    tempsPasse: string | null
+    signature: string | null
+    _count: ReceptionCountAggregateOutputType | null
+    _avg: ReceptionAvgAggregateOutputType | null
+    _sum: ReceptionSumAggregateOutputType | null
+    _min: ReceptionMinAggregateOutputType | null
+    _max: ReceptionMaxAggregateOutputType | null
+  }
+
+  type GetReceptionGroupByPayload<T extends ReceptionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ReceptionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ReceptionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ReceptionGroupByOutputType[P]>
+            : GetScalarType<T[P], ReceptionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ReceptionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    company?: boolean
+    telephone?: boolean
+    registration?: boolean
+    distanceParcourue?: boolean
+    energie?: boolean
+    nbrPersonnes?: boolean
+    personneAContacter?: boolean
+    puissanceFiscale?: boolean
+    dateEntree?: boolean
+    dateSortie?: boolean
+    tempsPasse?: boolean
+    signature?: boolean
+  }, ExtArgs["result"]["reception"]>
+
+  export type ReceptionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    company?: boolean
+    telephone?: boolean
+    registration?: boolean
+    distanceParcourue?: boolean
+    energie?: boolean
+    nbrPersonnes?: boolean
+    personneAContacter?: boolean
+    puissanceFiscale?: boolean
+    dateEntree?: boolean
+    dateSortie?: boolean
+    tempsPasse?: boolean
+    signature?: boolean
+  }, ExtArgs["result"]["reception"]>
+
+  export type ReceptionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    company?: boolean
+    telephone?: boolean
+    registration?: boolean
+    distanceParcourue?: boolean
+    energie?: boolean
+    nbrPersonnes?: boolean
+    personneAContacter?: boolean
+    puissanceFiscale?: boolean
+    dateEntree?: boolean
+    dateSortie?: boolean
+    tempsPasse?: boolean
+    signature?: boolean
+  }, ExtArgs["result"]["reception"]>
+
+  export type ReceptionSelectScalar = {
+    id?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    company?: boolean
+    telephone?: boolean
+    registration?: boolean
+    distanceParcourue?: boolean
+    energie?: boolean
+    nbrPersonnes?: boolean
+    personneAContacter?: boolean
+    puissanceFiscale?: boolean
+    dateEntree?: boolean
+    dateSortie?: boolean
+    tempsPasse?: boolean
+    signature?: boolean
+  }
+
+  export type ReceptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "company" | "telephone" | "registration" | "distanceParcourue" | "energie" | "nbrPersonnes" | "personneAContacter" | "puissanceFiscale" | "dateEntree" | "dateSortie" | "tempsPasse" | "signature", ExtArgs["result"]["reception"]>
+
+  export type $ReceptionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Reception"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      firstName: string
+      lastName: string
+      company: string
+      telephone: string
+      registration: string | null
+      distanceParcourue: number
+      energie: string
+      nbrPersonnes: number
+      personneAContacter: string
+      puissanceFiscale: number | null
+      dateEntree: Date
+      dateSortie: Date | null
+      tempsPasse: string | null
+      signature: string | null
+    }, ExtArgs["result"]["reception"]>
+    composites: {}
+  }
+
+  type ReceptionGetPayload<S extends boolean | null | undefined | ReceptionDefaultArgs> = $Result.GetResult<Prisma.$ReceptionPayload, S>
+
+  type ReceptionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ReceptionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ReceptionCountAggregateInputType | true
+    }
+
+  export interface ReceptionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Reception'], meta: { name: 'Reception' } }
+    /**
+     * Find zero or one Reception that matches the filter.
+     * @param {ReceptionFindUniqueArgs} args - Arguments to find a Reception
+     * @example
+     * // Get one Reception
+     * const reception = await prisma.reception.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ReceptionFindUniqueArgs>(args: SelectSubset<T, ReceptionFindUniqueArgs<ExtArgs>>): Prisma__ReceptionClient<$Result.GetResult<Prisma.$ReceptionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Reception that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ReceptionFindUniqueOrThrowArgs} args - Arguments to find a Reception
+     * @example
+     * // Get one Reception
+     * const reception = await prisma.reception.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ReceptionFindUniqueOrThrowArgs>(args: SelectSubset<T, ReceptionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ReceptionClient<$Result.GetResult<Prisma.$ReceptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Reception that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReceptionFindFirstArgs} args - Arguments to find a Reception
+     * @example
+     * // Get one Reception
+     * const reception = await prisma.reception.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ReceptionFindFirstArgs>(args?: SelectSubset<T, ReceptionFindFirstArgs<ExtArgs>>): Prisma__ReceptionClient<$Result.GetResult<Prisma.$ReceptionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Reception that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReceptionFindFirstOrThrowArgs} args - Arguments to find a Reception
+     * @example
+     * // Get one Reception
+     * const reception = await prisma.reception.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ReceptionFindFirstOrThrowArgs>(args?: SelectSubset<T, ReceptionFindFirstOrThrowArgs<ExtArgs>>): Prisma__ReceptionClient<$Result.GetResult<Prisma.$ReceptionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Receptions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReceptionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Receptions
+     * const receptions = await prisma.reception.findMany()
+     * 
+     * // Get first 10 Receptions
+     * const receptions = await prisma.reception.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const receptionWithIdOnly = await prisma.reception.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ReceptionFindManyArgs>(args?: SelectSubset<T, ReceptionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReceptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Reception.
+     * @param {ReceptionCreateArgs} args - Arguments to create a Reception.
+     * @example
+     * // Create one Reception
+     * const Reception = await prisma.reception.create({
+     *   data: {
+     *     // ... data to create a Reception
+     *   }
+     * })
+     * 
+     */
+    create<T extends ReceptionCreateArgs>(args: SelectSubset<T, ReceptionCreateArgs<ExtArgs>>): Prisma__ReceptionClient<$Result.GetResult<Prisma.$ReceptionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Receptions.
+     * @param {ReceptionCreateManyArgs} args - Arguments to create many Receptions.
+     * @example
+     * // Create many Receptions
+     * const reception = await prisma.reception.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ReceptionCreateManyArgs>(args?: SelectSubset<T, ReceptionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Receptions and returns the data saved in the database.
+     * @param {ReceptionCreateManyAndReturnArgs} args - Arguments to create many Receptions.
+     * @example
+     * // Create many Receptions
+     * const reception = await prisma.reception.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Receptions and only return the `id`
+     * const receptionWithIdOnly = await prisma.reception.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ReceptionCreateManyAndReturnArgs>(args?: SelectSubset<T, ReceptionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReceptionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Reception.
+     * @param {ReceptionDeleteArgs} args - Arguments to delete one Reception.
+     * @example
+     * // Delete one Reception
+     * const Reception = await prisma.reception.delete({
+     *   where: {
+     *     // ... filter to delete one Reception
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ReceptionDeleteArgs>(args: SelectSubset<T, ReceptionDeleteArgs<ExtArgs>>): Prisma__ReceptionClient<$Result.GetResult<Prisma.$ReceptionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Reception.
+     * @param {ReceptionUpdateArgs} args - Arguments to update one Reception.
+     * @example
+     * // Update one Reception
+     * const reception = await prisma.reception.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ReceptionUpdateArgs>(args: SelectSubset<T, ReceptionUpdateArgs<ExtArgs>>): Prisma__ReceptionClient<$Result.GetResult<Prisma.$ReceptionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Receptions.
+     * @param {ReceptionDeleteManyArgs} args - Arguments to filter Receptions to delete.
+     * @example
+     * // Delete a few Receptions
+     * const { count } = await prisma.reception.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ReceptionDeleteManyArgs>(args?: SelectSubset<T, ReceptionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Receptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReceptionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Receptions
+     * const reception = await prisma.reception.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ReceptionUpdateManyArgs>(args: SelectSubset<T, ReceptionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Receptions and returns the data updated in the database.
+     * @param {ReceptionUpdateManyAndReturnArgs} args - Arguments to update many Receptions.
+     * @example
+     * // Update many Receptions
+     * const reception = await prisma.reception.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Receptions and only return the `id`
+     * const receptionWithIdOnly = await prisma.reception.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ReceptionUpdateManyAndReturnArgs>(args: SelectSubset<T, ReceptionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReceptionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Reception.
+     * @param {ReceptionUpsertArgs} args - Arguments to update or create a Reception.
+     * @example
+     * // Update or create a Reception
+     * const reception = await prisma.reception.upsert({
+     *   create: {
+     *     // ... data to create a Reception
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Reception we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ReceptionUpsertArgs>(args: SelectSubset<T, ReceptionUpsertArgs<ExtArgs>>): Prisma__ReceptionClient<$Result.GetResult<Prisma.$ReceptionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Receptions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReceptionCountArgs} args - Arguments to filter Receptions to count.
+     * @example
+     * // Count the number of Receptions
+     * const count = await prisma.reception.count({
+     *   where: {
+     *     // ... the filter for the Receptions we want to count
+     *   }
+     * })
+    **/
+    count<T extends ReceptionCountArgs>(
+      args?: Subset<T, ReceptionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ReceptionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Reception.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReceptionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ReceptionAggregateArgs>(args: Subset<T, ReceptionAggregateArgs>): Prisma.PrismaPromise<GetReceptionAggregateType<T>>
+
+    /**
+     * Group by Reception.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ReceptionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ReceptionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ReceptionGroupByArgs['orderBy'] }
+        : { orderBy?: ReceptionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ReceptionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReceptionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Reception model
+   */
+  readonly fields: ReceptionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Reception.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ReceptionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Reception model
+   */
+  interface ReceptionFieldRefs {
+    readonly id: FieldRef<"Reception", 'Int'>
+    readonly firstName: FieldRef<"Reception", 'String'>
+    readonly lastName: FieldRef<"Reception", 'String'>
+    readonly company: FieldRef<"Reception", 'String'>
+    readonly telephone: FieldRef<"Reception", 'String'>
+    readonly registration: FieldRef<"Reception", 'String'>
+    readonly distanceParcourue: FieldRef<"Reception", 'Int'>
+    readonly energie: FieldRef<"Reception", 'String'>
+    readonly nbrPersonnes: FieldRef<"Reception", 'Int'>
+    readonly personneAContacter: FieldRef<"Reception", 'String'>
+    readonly puissanceFiscale: FieldRef<"Reception", 'Int'>
+    readonly dateEntree: FieldRef<"Reception", 'DateTime'>
+    readonly dateSortie: FieldRef<"Reception", 'DateTime'>
+    readonly tempsPasse: FieldRef<"Reception", 'String'>
+    readonly signature: FieldRef<"Reception", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Reception findUnique
+   */
+  export type ReceptionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reception
+     */
+    select?: ReceptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reception
+     */
+    omit?: ReceptionOmit<ExtArgs> | null
+    /**
+     * Filter, which Reception to fetch.
+     */
+    where: ReceptionWhereUniqueInput
+  }
+
+  /**
+   * Reception findUniqueOrThrow
+   */
+  export type ReceptionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reception
+     */
+    select?: ReceptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reception
+     */
+    omit?: ReceptionOmit<ExtArgs> | null
+    /**
+     * Filter, which Reception to fetch.
+     */
+    where: ReceptionWhereUniqueInput
+  }
+
+  /**
+   * Reception findFirst
+   */
+  export type ReceptionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reception
+     */
+    select?: ReceptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reception
+     */
+    omit?: ReceptionOmit<ExtArgs> | null
+    /**
+     * Filter, which Reception to fetch.
+     */
+    where?: ReceptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Receptions to fetch.
+     */
+    orderBy?: ReceptionOrderByWithRelationInput | ReceptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Receptions.
+     */
+    cursor?: ReceptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Receptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Receptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Receptions.
+     */
+    distinct?: ReceptionScalarFieldEnum | ReceptionScalarFieldEnum[]
+  }
+
+  /**
+   * Reception findFirstOrThrow
+   */
+  export type ReceptionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reception
+     */
+    select?: ReceptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reception
+     */
+    omit?: ReceptionOmit<ExtArgs> | null
+    /**
+     * Filter, which Reception to fetch.
+     */
+    where?: ReceptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Receptions to fetch.
+     */
+    orderBy?: ReceptionOrderByWithRelationInput | ReceptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Receptions.
+     */
+    cursor?: ReceptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Receptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Receptions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Receptions.
+     */
+    distinct?: ReceptionScalarFieldEnum | ReceptionScalarFieldEnum[]
+  }
+
+  /**
+   * Reception findMany
+   */
+  export type ReceptionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reception
+     */
+    select?: ReceptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reception
+     */
+    omit?: ReceptionOmit<ExtArgs> | null
+    /**
+     * Filter, which Receptions to fetch.
+     */
+    where?: ReceptionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Receptions to fetch.
+     */
+    orderBy?: ReceptionOrderByWithRelationInput | ReceptionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Receptions.
+     */
+    cursor?: ReceptionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Receptions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Receptions.
+     */
+    skip?: number
+    distinct?: ReceptionScalarFieldEnum | ReceptionScalarFieldEnum[]
+  }
+
+  /**
+   * Reception create
+   */
+  export type ReceptionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reception
+     */
+    select?: ReceptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reception
+     */
+    omit?: ReceptionOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Reception.
+     */
+    data: XOR<ReceptionCreateInput, ReceptionUncheckedCreateInput>
+  }
+
+  /**
+   * Reception createMany
+   */
+  export type ReceptionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Receptions.
+     */
+    data: ReceptionCreateManyInput | ReceptionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Reception createManyAndReturn
+   */
+  export type ReceptionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reception
+     */
+    select?: ReceptionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reception
+     */
+    omit?: ReceptionOmit<ExtArgs> | null
+    /**
+     * The data used to create many Receptions.
+     */
+    data: ReceptionCreateManyInput | ReceptionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Reception update
+   */
+  export type ReceptionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reception
+     */
+    select?: ReceptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reception
+     */
+    omit?: ReceptionOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Reception.
+     */
+    data: XOR<ReceptionUpdateInput, ReceptionUncheckedUpdateInput>
+    /**
+     * Choose, which Reception to update.
+     */
+    where: ReceptionWhereUniqueInput
+  }
+
+  /**
+   * Reception updateMany
+   */
+  export type ReceptionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Receptions.
+     */
+    data: XOR<ReceptionUpdateManyMutationInput, ReceptionUncheckedUpdateManyInput>
+    /**
+     * Filter which Receptions to update
+     */
+    where?: ReceptionWhereInput
+    /**
+     * Limit how many Receptions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Reception updateManyAndReturn
+   */
+  export type ReceptionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reception
+     */
+    select?: ReceptionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reception
+     */
+    omit?: ReceptionOmit<ExtArgs> | null
+    /**
+     * The data used to update Receptions.
+     */
+    data: XOR<ReceptionUpdateManyMutationInput, ReceptionUncheckedUpdateManyInput>
+    /**
+     * Filter which Receptions to update
+     */
+    where?: ReceptionWhereInput
+    /**
+     * Limit how many Receptions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Reception upsert
+   */
+  export type ReceptionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reception
+     */
+    select?: ReceptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reception
+     */
+    omit?: ReceptionOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Reception to update in case it exists.
+     */
+    where: ReceptionWhereUniqueInput
+    /**
+     * In case the Reception found by the `where` argument doesn't exist, create a new Reception with this data.
+     */
+    create: XOR<ReceptionCreateInput, ReceptionUncheckedCreateInput>
+    /**
+     * In case the Reception was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ReceptionUpdateInput, ReceptionUncheckedUpdateInput>
+  }
+
+  /**
+   * Reception delete
+   */
+  export type ReceptionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reception
+     */
+    select?: ReceptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reception
+     */
+    omit?: ReceptionOmit<ExtArgs> | null
+    /**
+     * Filter which Reception to delete.
+     */
+    where: ReceptionWhereUniqueInput
+  }
+
+  /**
+   * Reception deleteMany
+   */
+  export type ReceptionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Receptions to delete
+     */
+    where?: ReceptionWhereInput
+    /**
+     * Limit how many Receptions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Reception without action
+   */
+  export type ReceptionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Reception
+     */
+    select?: ReceptionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Reception
+     */
+    omit?: ReceptionOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -8148,6 +9410,27 @@ export namespace Prisma {
   };
 
   export type OthersScalarFieldEnum = (typeof OthersScalarFieldEnum)[keyof typeof OthersScalarFieldEnum]
+
+
+  export const ReceptionScalarFieldEnum: {
+    id: 'id',
+    firstName: 'firstName',
+    lastName: 'lastName',
+    company: 'company',
+    telephone: 'telephone',
+    registration: 'registration',
+    distanceParcourue: 'distanceParcourue',
+    energie: 'energie',
+    nbrPersonnes: 'nbrPersonnes',
+    personneAContacter: 'personneAContacter',
+    puissanceFiscale: 'puissanceFiscale',
+    dateEntree: 'dateEntree',
+    dateSortie: 'dateSortie',
+    tempsPasse: 'tempsPasse',
+    signature: 'signature'
+  };
+
+  export type ReceptionScalarFieldEnum = (typeof ReceptionScalarFieldEnum)[keyof typeof ReceptionScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -8689,6 +9972,110 @@ export namespace Prisma {
     signature?: StringNullableWithAggregatesFilter<"Others"> | string | null
   }
 
+  export type ReceptionWhereInput = {
+    AND?: ReceptionWhereInput | ReceptionWhereInput[]
+    OR?: ReceptionWhereInput[]
+    NOT?: ReceptionWhereInput | ReceptionWhereInput[]
+    id?: IntFilter<"Reception"> | number
+    firstName?: StringFilter<"Reception"> | string
+    lastName?: StringFilter<"Reception"> | string
+    company?: StringFilter<"Reception"> | string
+    telephone?: StringFilter<"Reception"> | string
+    registration?: StringNullableFilter<"Reception"> | string | null
+    distanceParcourue?: IntFilter<"Reception"> | number
+    energie?: StringFilter<"Reception"> | string
+    nbrPersonnes?: IntFilter<"Reception"> | number
+    personneAContacter?: StringFilter<"Reception"> | string
+    puissanceFiscale?: IntNullableFilter<"Reception"> | number | null
+    dateEntree?: DateTimeFilter<"Reception"> | Date | string
+    dateSortie?: DateTimeNullableFilter<"Reception"> | Date | string | null
+    tempsPasse?: StringNullableFilter<"Reception"> | string | null
+    signature?: StringNullableFilter<"Reception"> | string | null
+  }
+
+  export type ReceptionOrderByWithRelationInput = {
+    id?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    company?: SortOrder
+    telephone?: SortOrder
+    registration?: SortOrderInput | SortOrder
+    distanceParcourue?: SortOrder
+    energie?: SortOrder
+    nbrPersonnes?: SortOrder
+    personneAContacter?: SortOrder
+    puissanceFiscale?: SortOrderInput | SortOrder
+    dateEntree?: SortOrder
+    dateSortie?: SortOrderInput | SortOrder
+    tempsPasse?: SortOrderInput | SortOrder
+    signature?: SortOrderInput | SortOrder
+  }
+
+  export type ReceptionWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: ReceptionWhereInput | ReceptionWhereInput[]
+    OR?: ReceptionWhereInput[]
+    NOT?: ReceptionWhereInput | ReceptionWhereInput[]
+    firstName?: StringFilter<"Reception"> | string
+    lastName?: StringFilter<"Reception"> | string
+    company?: StringFilter<"Reception"> | string
+    telephone?: StringFilter<"Reception"> | string
+    registration?: StringNullableFilter<"Reception"> | string | null
+    distanceParcourue?: IntFilter<"Reception"> | number
+    energie?: StringFilter<"Reception"> | string
+    nbrPersonnes?: IntFilter<"Reception"> | number
+    personneAContacter?: StringFilter<"Reception"> | string
+    puissanceFiscale?: IntNullableFilter<"Reception"> | number | null
+    dateEntree?: DateTimeFilter<"Reception"> | Date | string
+    dateSortie?: DateTimeNullableFilter<"Reception"> | Date | string | null
+    tempsPasse?: StringNullableFilter<"Reception"> | string | null
+    signature?: StringNullableFilter<"Reception"> | string | null
+  }, "id">
+
+  export type ReceptionOrderByWithAggregationInput = {
+    id?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    company?: SortOrder
+    telephone?: SortOrder
+    registration?: SortOrderInput | SortOrder
+    distanceParcourue?: SortOrder
+    energie?: SortOrder
+    nbrPersonnes?: SortOrder
+    personneAContacter?: SortOrder
+    puissanceFiscale?: SortOrderInput | SortOrder
+    dateEntree?: SortOrder
+    dateSortie?: SortOrderInput | SortOrder
+    tempsPasse?: SortOrderInput | SortOrder
+    signature?: SortOrderInput | SortOrder
+    _count?: ReceptionCountOrderByAggregateInput
+    _avg?: ReceptionAvgOrderByAggregateInput
+    _max?: ReceptionMaxOrderByAggregateInput
+    _min?: ReceptionMinOrderByAggregateInput
+    _sum?: ReceptionSumOrderByAggregateInput
+  }
+
+  export type ReceptionScalarWhereWithAggregatesInput = {
+    AND?: ReceptionScalarWhereWithAggregatesInput | ReceptionScalarWhereWithAggregatesInput[]
+    OR?: ReceptionScalarWhereWithAggregatesInput[]
+    NOT?: ReceptionScalarWhereWithAggregatesInput | ReceptionScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Reception"> | number
+    firstName?: StringWithAggregatesFilter<"Reception"> | string
+    lastName?: StringWithAggregatesFilter<"Reception"> | string
+    company?: StringWithAggregatesFilter<"Reception"> | string
+    telephone?: StringWithAggregatesFilter<"Reception"> | string
+    registration?: StringNullableWithAggregatesFilter<"Reception"> | string | null
+    distanceParcourue?: IntWithAggregatesFilter<"Reception"> | number
+    energie?: StringWithAggregatesFilter<"Reception"> | string
+    nbrPersonnes?: IntWithAggregatesFilter<"Reception"> | number
+    personneAContacter?: StringWithAggregatesFilter<"Reception"> | string
+    puissanceFiscale?: IntNullableWithAggregatesFilter<"Reception"> | number | null
+    dateEntree?: DateTimeWithAggregatesFilter<"Reception"> | Date | string
+    dateSortie?: DateTimeNullableWithAggregatesFilter<"Reception"> | Date | string | null
+    tempsPasse?: StringNullableWithAggregatesFilter<"Reception"> | string | null
+    signature?: StringNullableWithAggregatesFilter<"Reception"> | string | null
+  }
+
   export type UserCreateInput = {
     name?: string | null
     email: string
@@ -9177,6 +10564,129 @@ export namespace Prisma {
     signature?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type ReceptionCreateInput = {
+    firstName: string
+    lastName: string
+    company: string
+    telephone: string
+    registration?: string | null
+    distanceParcourue: number
+    energie: string
+    nbrPersonnes: number
+    personneAContacter: string
+    puissanceFiscale?: number | null
+    dateEntree?: Date | string
+    dateSortie?: Date | string | null
+    tempsPasse?: string | null
+    signature?: string | null
+  }
+
+  export type ReceptionUncheckedCreateInput = {
+    id?: number
+    firstName: string
+    lastName: string
+    company: string
+    telephone: string
+    registration?: string | null
+    distanceParcourue: number
+    energie: string
+    nbrPersonnes: number
+    personneAContacter: string
+    puissanceFiscale?: number | null
+    dateEntree?: Date | string
+    dateSortie?: Date | string | null
+    tempsPasse?: string | null
+    signature?: string | null
+  }
+
+  export type ReceptionUpdateInput = {
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    company?: StringFieldUpdateOperationsInput | string
+    telephone?: StringFieldUpdateOperationsInput | string
+    registration?: NullableStringFieldUpdateOperationsInput | string | null
+    distanceParcourue?: IntFieldUpdateOperationsInput | number
+    energie?: StringFieldUpdateOperationsInput | string
+    nbrPersonnes?: IntFieldUpdateOperationsInput | number
+    personneAContacter?: StringFieldUpdateOperationsInput | string
+    puissanceFiscale?: NullableIntFieldUpdateOperationsInput | number | null
+    dateEntree?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateSortie?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tempsPasse?: NullableStringFieldUpdateOperationsInput | string | null
+    signature?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ReceptionUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    company?: StringFieldUpdateOperationsInput | string
+    telephone?: StringFieldUpdateOperationsInput | string
+    registration?: NullableStringFieldUpdateOperationsInput | string | null
+    distanceParcourue?: IntFieldUpdateOperationsInput | number
+    energie?: StringFieldUpdateOperationsInput | string
+    nbrPersonnes?: IntFieldUpdateOperationsInput | number
+    personneAContacter?: StringFieldUpdateOperationsInput | string
+    puissanceFiscale?: NullableIntFieldUpdateOperationsInput | number | null
+    dateEntree?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateSortie?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tempsPasse?: NullableStringFieldUpdateOperationsInput | string | null
+    signature?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ReceptionCreateManyInput = {
+    id?: number
+    firstName: string
+    lastName: string
+    company: string
+    telephone: string
+    registration?: string | null
+    distanceParcourue: number
+    energie: string
+    nbrPersonnes: number
+    personneAContacter: string
+    puissanceFiscale?: number | null
+    dateEntree?: Date | string
+    dateSortie?: Date | string | null
+    tempsPasse?: string | null
+    signature?: string | null
+  }
+
+  export type ReceptionUpdateManyMutationInput = {
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    company?: StringFieldUpdateOperationsInput | string
+    telephone?: StringFieldUpdateOperationsInput | string
+    registration?: NullableStringFieldUpdateOperationsInput | string | null
+    distanceParcourue?: IntFieldUpdateOperationsInput | number
+    energie?: StringFieldUpdateOperationsInput | string
+    nbrPersonnes?: IntFieldUpdateOperationsInput | number
+    personneAContacter?: StringFieldUpdateOperationsInput | string
+    puissanceFiscale?: NullableIntFieldUpdateOperationsInput | number | null
+    dateEntree?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateSortie?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tempsPasse?: NullableStringFieldUpdateOperationsInput | string | null
+    signature?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type ReceptionUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    company?: StringFieldUpdateOperationsInput | string
+    telephone?: StringFieldUpdateOperationsInput | string
+    registration?: NullableStringFieldUpdateOperationsInput | string | null
+    distanceParcourue?: IntFieldUpdateOperationsInput | number
+    energie?: StringFieldUpdateOperationsInput | string
+    nbrPersonnes?: IntFieldUpdateOperationsInput | number
+    personneAContacter?: StringFieldUpdateOperationsInput | string
+    puissanceFiscale?: NullableIntFieldUpdateOperationsInput | number | null
+    dateEntree?: DateTimeFieldUpdateOperationsInput | Date | string
+    dateSortie?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tempsPasse?: NullableStringFieldUpdateOperationsInput | string | null
+    signature?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -9646,6 +11156,74 @@ export namespace Prisma {
   }
 
   export type OthersSumOrderByAggregateInput = {
+    id?: SortOrder
+    distanceParcourue?: SortOrder
+    nbrPersonnes?: SortOrder
+    puissanceFiscale?: SortOrder
+  }
+
+  export type ReceptionCountOrderByAggregateInput = {
+    id?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    company?: SortOrder
+    telephone?: SortOrder
+    registration?: SortOrder
+    distanceParcourue?: SortOrder
+    energie?: SortOrder
+    nbrPersonnes?: SortOrder
+    personneAContacter?: SortOrder
+    puissanceFiscale?: SortOrder
+    dateEntree?: SortOrder
+    dateSortie?: SortOrder
+    tempsPasse?: SortOrder
+    signature?: SortOrder
+  }
+
+  export type ReceptionAvgOrderByAggregateInput = {
+    id?: SortOrder
+    distanceParcourue?: SortOrder
+    nbrPersonnes?: SortOrder
+    puissanceFiscale?: SortOrder
+  }
+
+  export type ReceptionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    company?: SortOrder
+    telephone?: SortOrder
+    registration?: SortOrder
+    distanceParcourue?: SortOrder
+    energie?: SortOrder
+    nbrPersonnes?: SortOrder
+    personneAContacter?: SortOrder
+    puissanceFiscale?: SortOrder
+    dateEntree?: SortOrder
+    dateSortie?: SortOrder
+    tempsPasse?: SortOrder
+    signature?: SortOrder
+  }
+
+  export type ReceptionMinOrderByAggregateInput = {
+    id?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    company?: SortOrder
+    telephone?: SortOrder
+    registration?: SortOrder
+    distanceParcourue?: SortOrder
+    energie?: SortOrder
+    nbrPersonnes?: SortOrder
+    personneAContacter?: SortOrder
+    puissanceFiscale?: SortOrder
+    dateEntree?: SortOrder
+    dateSortie?: SortOrder
+    tempsPasse?: SortOrder
+    signature?: SortOrder
+  }
+
+  export type ReceptionSumOrderByAggregateInput = {
     id?: SortOrder
     distanceParcourue?: SortOrder
     nbrPersonnes?: SortOrder

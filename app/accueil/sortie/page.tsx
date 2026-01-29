@@ -35,7 +35,7 @@ export default function OthersSortieForm() {
 
     setLoading(true);
     try {
-      const res = await fetch("/api/others/sortie", {
+      const res = await fetch("/api/reception/sortie", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ firstName: prenom, lastName: nom, company: entreprise, signature: signatureImage }),

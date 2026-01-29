@@ -6,7 +6,6 @@ import Link from "next/link";
 import LogoutButton from "@/app/components/LogoutButton";
 import OthersTable from "@/app/components/OtherTable";
 
-// 1. On définit le type correctement comme une Promise
 interface AdminPageProps {
   searchParams: Promise<{
     page?: string;
@@ -15,21 +14,15 @@ interface AdminPageProps {
   }>;
 }
 
-// 2. On change la signature de la fonction pour accepter "props"
 export default async function AdminPage(props: AdminPageProps) {
   const session = await getServerSession(authOptions);
   
   if (!session) {
     redirect("/login");
   }
-
-  // 3. On "await" les searchParams avant de les utiliser
   const searchParams = await props.searchParams;
-
   const page = parseInt(searchParams.page || "1", 10);
   const perPage = 50;
-  
-  // Utilisation de la version "attendue" (awaited) de searchParams
   const search = searchParams.search?.trim() || "";
   const company = searchParams.company?.trim() || "";
   

@@ -191,6 +191,24 @@ exports.Prisma.OthersScalarFieldEnum = {
   signature: 'signature'
 };
 
+exports.Prisma.ReceptionScalarFieldEnum = {
+  id: 'id',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  company: 'company',
+  telephone: 'telephone',
+  registration: 'registration',
+  distanceParcourue: 'distanceParcourue',
+  energie: 'energie',
+  nbrPersonnes: 'nbrPersonnes',
+  personneAContacter: 'personneAContacter',
+  puissanceFiscale: 'puissanceFiscale',
+  dateEntree: 'dateEntree',
+  dateSortie: 'dateSortie',
+  tempsPasse: 'tempsPasse',
+  signature: 'signature'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -213,7 +231,8 @@ exports.Prisma.ModelName = {
   Session: 'Session',
   VerificationToken: 'VerificationToken',
   Logistic: 'Logistic',
-  Others: 'Others'
+  Others: 'Others',
+  Reception: 'Reception'
 };
 
 /**

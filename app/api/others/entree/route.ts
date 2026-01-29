@@ -5,7 +5,6 @@ export async function POST(req: Request) {
   try {
     const body = await req.json();
 
-    // ✅ Normalisation des chaînes de texte
     const firstName = body.firstName?.trim().toUpperCase() ?? "";
     const lastName = body.lastName?.trim().toUpperCase() ?? "";
     const company = body.company?.trim().toUpperCase() ?? "";

@@ -6,7 +6,6 @@ import Link from "next/link"; // <--- C'était la ligne manquante !
 import LogoutButton from "@/app/components/LogoutButton";
 import LogisticTable from "@/app/components/LogisticTable";
 
-// 1. Définition du type en Promise
 interface AdminPageProps {
   searchParams: Promise<{
     page?: string;
