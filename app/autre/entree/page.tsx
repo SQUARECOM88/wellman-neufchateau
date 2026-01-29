@@ -14,8 +14,6 @@ const CONTACTS_WELLMAN = [
   "HACQUART Marjolaine",
   "HARMAND Gauthier",
   "KATIC Sacha",
-  "KISYLYCZKO Maxime",
-  "LEROY Philippe",
   "MORLIN Nicolas",
   "RENAULT Béatrice",
 ];
@@ -30,7 +28,7 @@ export default function OthersFormSlider() {
     "/FR_interdictions.png", 
     "/FR_obligation.png",
     "/FR_deversement.png",
-    "/FR_simple.png"
+    "/FR_plan2.png"
   ];
 
   const [index, setIndex] = useState(0);

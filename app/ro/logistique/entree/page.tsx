@@ -20,7 +20,7 @@ export default function LogistiqueSlider() {
   
   const postChoiceImagesByReason: Record<string, string[]> = {
     dechargement: ["/RO/loading.png", "/RO/chauffeur.png"],
-    depotage: ["/RO/chauffeur.png", "/RO/acces.png"],
+    depotage: ["/RO/chauffeur.png", "/RO/acces.png", "EN_simple.png"],
     quai: ["/RO/chauffeur.png", "/RO/loading.png"],
     expedition: ["/RO/chauffeur.png", "/oblig2-en.png", "/oblig3-en.png", "/oblig5-en.png", "/RO/loading.png"],
   };
@@ -158,7 +158,7 @@ export default function LogistiqueSlider() {
             alt=""
             width={800}
             height={600}
-            className="object-contain rounded-xl shadow-lg"
+            className="object-contain w-[800px] h-[600px] rounded-xl shadow-lg"
           />
           <div className="flex gap-4 mt-4">
             <button 
