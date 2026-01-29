@@ -8,14 +8,12 @@ import RgpdNotice from "@/app/components/Rgpd";
 
 const CONTACTS_WELLMAN = [
   "BREDARD Sébastien",
-  "FAVARD Annaëlle",
   "FAVRE Fabien",
   "FAVRE Romain",
   "HACQUART Marjolaine",
   "HARMAND Gauthier",
   "KATIC Sacha",
   "MORLIN Nicolas",
-  "RENAULT Béatrice",
 ];
 
 export default function OthersFormSlider() {
