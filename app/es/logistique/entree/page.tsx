@@ -11,10 +11,10 @@ export default function LogistiqueSlider() {
   const introImages = ["/ES/ES_iso.png", "/EN_environnement.png","/EN_urgences.jpg", "/Tablette-8-indorama-GB.jpg", "/FR_obligation.png"]; 
   
   const postChoiceImagesByReason: Record<string, string[]> = {
-    dechargement: ["/EN_obligation_dechargement.png", "/ES/chauffeur.png"],
+    dechargement: ["/EN_obligation_dechargement.png", "/EN_obligations_chauffeur.png"],
     depotage: ["/ES/chauffeur.png", "/ES/acces.png", "EN_simple.png"],
-    quai: ["/ES/chauffeur.png", "/EN_obligation_dechargement.png"],
-    expedition: ["/ES/chauffeur.png", "/oblig2-en.png", "/oblig3-en.png", "/oblig5-en.png", "/EN_obligation_dechargement.png"],
+    quai: ["/EN_obligations_chauffeur.png", "/EN_obligation_dechargement.png"],
+    expedition: ["/EN_obligations_chauffeur.png", "/oblig2-en.png", "/oblig3-en.png", "/oblig5-en.png", "/EN_obligation_dechargement.png"],
   };
   
   const postChoiceCommonImages = [

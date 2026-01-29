@@ -19,10 +19,10 @@ export default function LogistiqueSlider() {
   ];
   
   const postChoiceImagesByReason: Record<string, string[]> = {
-    dechargement: ["/RU/dechargement.png", "/RO/chauffeur.png"],
+    dechargement: ["/RU/dechargement.png", "/EN_obligations_chauffeur.png"],
     depotage: ["/RO/chauffeur.png", "/RU/echelle.png", "/EN_simple.png"],
-    quai: ["/RO/chauffeur.png", "/RU/dechargement.png"],
-    expedition: ["/RO/chauffeur.png", "/RU/oblig2-ru.png", "/RU/oblig3-ru.png", "/RU/oblig4-ru.png", "/RU/dechargement.png"],
+    quai: ["/EN_obligations_chauffeur.png", "/RU/dechargement.png"],
+    expedition: ["/EN_obligations_chauffeur.png", "/RU/oblig2-ru.png", "/RU/oblig3-ru.png", "/RU/oblig4-ru.png", "/RU/dechargement.png"],
   };
   
   const postChoiceCommonImages = [
