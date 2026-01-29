@@ -29,6 +29,10 @@ export default function AutresPage() {
           Français 🇫🇷
         </button>
       </div>
+
+      <div className="text-black text-2xl">
+          <h1>VISITOR WELCOME SHEET</h1>
+      </div>
       <div className="flex flex-col lg:flex-row items-center gap-16 mt-20">
         <button
           onClick={() => (window.location.href = "/en/accueil/entree")}
