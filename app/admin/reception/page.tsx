@@ -60,23 +60,27 @@ export default async function AdminPage(props: AdminPageProps) {
 
   return (
     <main className="min-h-screen bg-gray-50 p-10">
-      <button
-        type="button"
-        className="absolute top-5 left-5 text-white bg-blue-700 hover:bg-blue-800 
-                   focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm 
-                   px-5 py-2.5 me-2 mb-2"
-      >
-        <Link href={"/admin/logistique"}>Tableau de bord "Logistique"</Link>
-      </button>
-      <button
-        type="button"
-        className="absolute top-5 left-5 text-white bg-blue-700 hover:bg-blue-800 
-                   focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm 
-                   px-5 py-2.5 me-2 mb-2"
-      >
-        <Link href={"/admin/autre"}>Tableau de bord "Autres"</Link>
-      </button>
+    <div className="absolute top-5 left-5 flex gap-4">
+        
+        <Link 
+          href="/admin/logistique"
+          className="text-white bg-blue-700 hover:bg-blue-800 
+                     focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm 
+                     px-5 py-2.5"
+        >
+          Tableau de bord "Logistique"
+        </Link>
 
+        <Link 
+          href="/admin/autre"
+          className="text-white bg-blue-700 hover:bg-blue-800 
+                     focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm 
+                     px-5 py-2.5"
+        >
+          Tableau de bord "Autres"
+        </Link>
+
+      </div>
       <LogoutButton />
 
       <h1 className="text-3xl font-bold mb-8 text-center text-gray-800">
