@@ -25,7 +25,7 @@ export default function OthersFormSlider() {
     "/FR_environnement.png", 
     "/FR_urgences.png", 
     "/FR_regle_secu.png",
-    "/FR_plan2.png"
+    "/FR_simple.png"
   ];
 
   const [index, setIndex] = useState(0);
