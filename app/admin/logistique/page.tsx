@@ -74,7 +74,14 @@ export default async function AdminPage(props: AdminPageProps) {
       >
         <Link href={"/admin/autre"}>Tableau de bord "Autre"</Link>
       </button>
-
+      <button
+        type="button"
+        className="absolute top-5 left-5 text-white bg-blue-700 hover:bg-blue-800 
+                   focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm 
+                   px-5 py-2.5 me-2 mb-2"
+      >
+        <Link href={"/admin/autre"}>Tableau de bord "Accueil"</Link>
+      </button>
       <LogoutButton />
 
       <h1 className="text-3xl font-bold mb-8 text-center text-gray-800">
