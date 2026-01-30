@@ -32,6 +32,7 @@ services:
       - "traefik.http.services.indoramatablettes.loadbalancer.server.port=3000"
     depends_on:
       - db
+    command: /bin/sh -c "npx prisma db push"
     restart: unless-stopped
     networks:
       - web
