@@ -6,16 +6,21 @@ import { useRouter } from "next/navigation";
 import RgpdNoticeEN from "@/app/components/RgpdEN";
 
 const CONTACTS_WELLMAN = [
+  "BAZAR Arnaud",
   "BREDARD Sébastien",
+  "FAVARD Annaëlle",
   "FAVRE Fabien",
   "FAVRE Romain",
   "HACQUART Marjolaine",
   "HARMAND Gauthier",
+  "HEMMERLE Clément",
   "KATIC Sacha",
-  "KISYLYCZKO Maxime",
-  "LEROY Philippe",
-  "MORLIN Nicolas",
+  "METADJER Adrien",
+  "RENAULT Béatrice",
+  "TORUN Sefa",
+  "WATEL Johann",
 ];
+
 
 export default function OthersFormSlider() {
   const router = useRouter();

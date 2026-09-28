@@ -7,15 +7,19 @@ import SignatureCanvas from "react-signature-canvas";
 import RgpdNotice from "@/app/components/Rgpd";
 
 const CONTACTS_WELLMAN = [
+  "BAZAR Arnaud",
   "BREDARD Sébastien",
   "FAVARD Annaëlle",
   "FAVRE Fabien",
   "FAVRE Romain",
   "HACQUART Marjolaine",
   "HARMAND Gauthier",
+  "HEMMERLE Clément",
   "KATIC Sacha",
-  "MORLIN Nicolas",
+  "METADJER Adrien",
   "RENAULT Béatrice",
+  "TORUN Sefa",
+  "WATEL Johann",
 ];
 
 export default function OthersFormSlider() {
