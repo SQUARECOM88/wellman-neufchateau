@@ -30,30 +30,34 @@ services:
       - "traefik.http.routers.indoramatablettes.entrypoints=websecure"
       - "traefik.http.routers.indoramatablettes.tls.certresolver=tlsresolver"
       - "traefik.http.services.indoramatablettes.loadbalancer.server.port=3000"
+    #command: /bin/sh -c "npx prisma db push"
+    ports:
+      - 3000:3000
     depends_on:
       - db
-    adminer:
-        image: adminer
-        container_name: logistic-adminer
-        restart: unless-stopped
-        environment:
-          ADMINER_DESIGN: pepa-linha
-        labels:
-          - "traefik.enable=true"
-          - "traefik.docker.network=web"
-          - "traefik.http.routers.indoramatablettesadminer.rule=Host(`${ADMINER_HOST}`)"
-          - "traefik.http.routers.indoramatablettesadminer.entrypoints=websecure"
-          - "traefik.http.routers.indoramatablettesadminer.tls.certresolver=tlsresolver"
-          - "traefik.http.services.indoramatablettesadminer.loadbalancer.server.port=8080"
-        networks:
-          - web
-          - internal
-        depends_on:
-        - db
     restart: unless-stopped
     networks:
       - web
       - internal
+
+  adminer:
+    image: adminer
+    container_name: logistic-adminer
+    restart: unless-stopped
+    environment:
+       ADMINER_DESIGN: pepa-linha
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=web"
+      - "traefik.http.routers.indoramatablettesadminer.rule=Host(`${ADMINER_HOST}`)"
+      - "traefik.http.routers.indoramatablettesadminer.entrypoints=websecure"
+      - "traefik.http.routers.indoramatablettesadminer.tls.certresolver=tlsresolver"
+      - "traefik.http.services.indoramatablettesadminer.loadbalancer.server.port=8080"
+    networks:
+      - web
+      - internal
+    depends_on:
+      - db
 
 networks:
   web:
